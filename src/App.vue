@@ -1,28 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
-</template>
+  <div id="class">
+    <AppBar></AppBar>
+    <CarouselComponent></CarouselComponent>
+    <FooterComponent></FooterComponent>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+  </div>
+  <!--TODO FRONT: partie 2 body + changer font text + pb icons  -->
+</template> 
+
+
+<script >
+//import component 
+import AppBar from '../src/components/AppBar.vue'
+import CarouselComponent from '../src/components/CarouselBody'
+import FooterComponent from '../src/components/FooterBody.vue'
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    AppBar,
+    CarouselComponent, 
+    FooterComponent, 
+
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style >
+/* body {
+  font-family: 'Poppins', sans-serif;
+} */
+
 </style>
