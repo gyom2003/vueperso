@@ -3,7 +3,7 @@
     <div class="buttonsbar">
       <el-button class="el-buttonstyle" @click.native.prevent="reserveclick">Reserver</el-button>
       <el-button class="el-buttonstyle">Commander</el-button>
-      <el-button class="el-buttonstyle">Waitlist</el-button>
+      <el-button class="el-buttonstyle">Waitlist</el-button>  
     </div>
 
     <div class="appmenues">
@@ -28,7 +28,7 @@ export default {
 
   methods: {
     reserveclick() {
-      return window.location.href = "../Reservation.vue"
+      this.$router.push('/reservation');
     }
   }
 }

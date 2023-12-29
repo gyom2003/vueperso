@@ -2,7 +2,7 @@
 
 <template>
     <div style="margin-top: 20px;">
-        <el-carousel :interval="4000" type="card" height="400px" width="200px" loop=true>
+        <el-carousel :interval="4000" type="card" height="400px" width="200px">
             <el-carousel-item v-for="item in imgdata" :key="item">
                 <img :src="item" style="width: 100%; height: 100%;" />
             </el-carousel-item>

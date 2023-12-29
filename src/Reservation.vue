@@ -16,6 +16,7 @@ export default {
 .globalreservation {
     width: 100%;
     height: 200px;
-    border: 1px solid black; 
+    border: 5px solid black; 
+    background-color: red;
 }
 </style>
