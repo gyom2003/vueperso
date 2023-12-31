@@ -9,7 +9,7 @@
     <div class="appmenues">
       <ul class="navigations">
         <li>
-          <a href="#">Accueil</a>
+          <a href="accueil">Accueil</a>
           <a href="#">Galerie</a>
           <a href="#">Videos</a>
           <a href="#">Carte</a>

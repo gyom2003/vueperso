@@ -21,7 +21,25 @@ Parce qu'ils aiment les assiettes copieuses, garnies de produits frais et délic
         </div>
 
         <div class="bodycontenttwo">
-            
+            <!--TODO: rework part 2 pos & responsive -->
+            <h1>Les Dernières actualités</h1>
+            <div class="contenttwoimg">
+                <img src="../assets/actu1.jpg"/>
+                <div class="imgcontentone">
+                    <p>9 Octobre 2023</p>
+                    <h3>Provatisez votre table !</h3>
+                </div>
+                <img src="../assets/actu2.jpeg"/>
+                <div class="imgcontenttwo">
+                    <p>20 Octobre 2023</p>
+                    <h3>notre nouveau bar à gins !</h3>
+                </div>
+                <img src="../assets/actu3.jpeg"/>
+                <div class="imgcontentthree">
+                    <p>17 Janvier 2023</p>
+                    <h3>De nouveaux plats vous attendent !</h3>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -46,6 +64,7 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Quicksand&display=swap');
 /*carousel part*/
 .el-carousel__item h3 {
     color: #475669;
@@ -112,6 +131,57 @@ export default {
     text-align: center;
     margin-top: 3%;
 }
+
+.bodycontenttwo {
+    width: 100%; 
+    border-bottom: 2px solid #ccc;
+    background-color: #fdf7f2;
+}
+.bodycontenttwo h1 {
+    position: relative;
+    font-size: 28px; 
+    font-weight: 300; 
+    margin-left: 10%;
+}
+.bodycontenttwo h1::after {
+    content: '';
+    display: block;
+    width: 35%;
+    height: 10%;
+    height: 8px;
+    background-color: #FCE9E5;
+    position: absolute;
+    bottom: -12px;
+    left: -11%;
+    transition: transform 0.3s ease;
+}
+.bodycontenttwo h1:hover::after {
+    transform: translateX(25%);
+}
+
+.contenttwoimg {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.contenttwoimg img {
+    position: relative;
+    width: 450px;
+    height: 500px;
+    margin: 30px;
+}
+
+.contenttwoimg h3 {
+    font-family: 'Abril Fatface', serif;
+    color: rgb(87, 87, 87);
+    font-size: 21px;
+}
+.imgcontentone {
+    z-index: 2;    
+}
+
+
 
 </style>
 
