@@ -21,10 +21,10 @@ const router = new VueRouter({
     { path: '/accueil', component: LayoutVue },
     { path: '/reservation', component: ReservationComponent },
   ]
-
 })
 
 new Vue({
   router, 
   render: h => h(App),
 }).$mount('#app');
+

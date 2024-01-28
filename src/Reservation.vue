@@ -6,18 +6,20 @@
         <div class="reservationcontent">
             <p>Accueil/Réservation</p>
             <h1>Réservation</h1>
-            <h3>Service gratuit - confirmation immédiate</h3>
+            <h3>Service gratuit - confirmation immédiate</h3>   
         </div>
         <div class="contentReservation">
             <el-calendar v-model="calendarvalue" @click.native.prevent="isSelectedHandler" />
-            <!--heure choix-->
 
             <el-form v-model="formData">
-                <div class="timechoice" v-if="iscalendarselected">
+                <div class="timechoice">
+                     <!--TODO: add checkbox diner/dejeuner -->
                     <div class="timerone">
                         <h1>Déjeuner</h1>
-                            <el-form-item style="width: 50%;">
-                                <el-select v-model="formData.timechoice" style="display: table-cell;" filtrable placeholder="Choisis l'horaire">
+                            <el-checkbox  :checked="!isChecked" v-model="checkDejeunercomputed" v-if="iscalendarselected" size="large"></el-checkbox> 
+
+                            <el-form-item style="width: 50%;" v-if="!isChecked">
+                                <el-select v-model="formData.timechoiceDejeuner" style="display: table-cell;" filtrable placeholder="Choisis l'horaire">
                                     <el-option v-for="item in SelectedDejeuner"
                                         :key="item.value"
                                         :label="item.label"
@@ -29,8 +31,10 @@
 
                     <div class="timertwo">
                         <h1>Dîner</h1>
-                            <el-form-item style="width: 50%;">
-                                <el-select  v-model="formData.timechoice" style="display: table-cell;" filtrable placeholder="Choisis l'horaire">
+                            <el-checkbox  :checked="isChecked" v-model="checkDinercomputed" v-if="iscalendarselected" size="large"></el-checkbox>
+
+                            <el-form-item style="width: 50%;" v-if="isChecked">
+                                <el-select  v-model="formData.timerchoiceDiner" style="display: table-cell;" filtrable placeholder="Choisis l'horaire">
                                     <el-option v-for="item in SelectedDiner"
                                         :key="item.value"
                                         :label="item.label"
@@ -41,8 +45,7 @@
                     </div>
                 </div>
 
-                  <!-- TODO nbr personnes choix si SelectedDejeuner | SelectedDiner-->
-                <div class="usernumberchoice" v-if="formData.timechoice">
+                <div class="usernumberchoice" v-if="calendarvalue" style="margin-left: 13%;">
                     <h1>Nombre de personnes</h1>
                     <el-form-item style="width: 50%; ">
                         <el-select  v-model="formData.userchoice" style="display: table-cell;" filtrable placeholder="Choisis l'horaire">
@@ -74,13 +77,36 @@ export default {
       AppBar,
       FooterComponent
   },
+  computed: {
+    checkDejeunercomputed: {
+        get() {
+            return !this.isChecked
+        },
+        set(value) {
+            this.isChecked = !value
+        }
+    }, 
+    checkDinercomputed: {
+        get() {
+            return this.isChecked
+        },
+        set(value) {
+            this.isChecked = value
+        }    
+    }, 
+},
 
+  created() {
+    this.isChecked = false;
+  },
   data() {
     return {
         calendarvalue: new Date(), 
         iscalendarselected: false, 
+        isChecked: false,  
         formData: {
-            timechoice: "",
+            timechoiceDejeuner: "",
+            timerchoiceDiner: "",
             userchoice: "",
         }, 
 
