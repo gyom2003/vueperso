@@ -1,5 +1,4 @@
 
-
 <template>
     <div class="globalreservation">
         <AppBar></AppBar>
@@ -13,10 +12,9 @@
 
             <el-form v-model="formData">
                 <div class="timechoice">
-                     <!--TODO: add checkbox diner/dejeuner -->
                     <div class="timerone">
                         <h1>Déjeuner</h1>
-                            <el-checkbox  :checked="!isChecked" v-model="checkDejeunercomputed" v-if="iscalendarselected" size="large"></el-checkbox> 
+                            <el-checkbox :checked="!isChecked" v-model="checkDejeunercomputed" v-if="iscalendarselected" size="large"></el-checkbox> 
 
                             <el-form-item style="width: 50%;" v-if="!isChecked">
                                 <el-select v-model="formData.timechoiceDejeuner" style="display: table-cell;" filtrable placeholder="Choisis l'horaire">
@@ -31,7 +29,7 @@
 
                     <div class="timertwo">
                         <h1>Dîner</h1>
-                            <el-checkbox  :checked="isChecked" v-model="checkDinercomputed" v-if="iscalendarselected" size="large"></el-checkbox>
+                            <el-checkbox :checked="isChecked" v-model="checkDinercomputed" v-if="iscalendarselected" size="large"></el-checkbox>
 
                             <el-form-item style="width: 50%;" v-if="isChecked">
                                 <el-select  v-model="formData.timerchoiceDiner" style="display: table-cell;" filtrable placeholder="Choisis l'horaire">
@@ -59,6 +57,9 @@
                 </div>
             </el-form>
 
+            <div class="validationbttn">
+                <el-button size="large" :plain="true" type="success" @click="sendDataReservation">Valider</el-button>
+            </div>
         </div>
 
         <FooterComponent></FooterComponent>
@@ -71,6 +72,8 @@
 
 import AppBar from '../src/components/AppBar.vue'
 import FooterComponent from '../src/components/FooterBody.vue'
+import VueTableObject from '../src/dblogic/model/models.js'
+
 export default {
     'name': 'ReservationComponent', 
     components: {
@@ -102,7 +105,7 @@ export default {
   data() {
     return {
         calendarvalue: new Date(), 
-        iscalendarselected: false, 
+        iscalendarselected: true, 
         isChecked: false,  
         formData: {
             timechoiceDejeuner: "",
@@ -144,6 +147,31 @@ export default {
   methods: {
     isSelectedHandler() {
         return this.iscalendarselected  = !this.iscalendarselected;
+    }, 
+
+    convertStringtoTimer(stringref) {
+        try {
+            const [hour, minute] = stringref.split(":").map(Number)
+            return new Date(0, 0, 0, hour, minute)
+        } catch(error) {
+            console.log("erreur traitement donnée", error)
+            throw error;
+        }
+    },
+
+    async sendDataReservation() {
+        try {
+            const dataVerification = this.convertStringtoTimer(this.formData.timechoiceDejeuner || this.formData.timerchoiceDiner)
+            if (dataVerification) {
+                const instanceAdd = await VueTableObject.create({
+                    reservationTimer: dataVerification
+                })
+                return instanceAdd;
+            } 
+        } catch(error) {
+            console.log("erreur traitement donnée", error)
+            throw error;
+        }
     }
   }
 }
@@ -196,8 +224,13 @@ export default {
 .timertwo {
     width: 400px;
 }
-
 .usernumberchoice {
     margin: 20px;
+}
+.validationbttn {
+    display:flex;
+    flex-direction: row;
+    padding: 25px;
+    margin-left: 12%;
 }
 </style>

@@ -13,6 +13,7 @@ Vue.config.productionTip = false;
 Vue.use(ElementUI, {locale});
 Vue.use(VueRouter);
 
+//TODO: add db 
 const router = new VueRouter({
   mode: 'history', 
   routes: [
